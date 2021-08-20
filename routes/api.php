@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,11 +21,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-//Creating Post
-Route::get('post',[PostController::class , 'getPost']);
-Route::post('post/create',[PostController::class, 'createPost']);
-Route::put('post/{id}', [PostController::class,'updatePost']);
-Route::delete('post/{id}' , [PostController::class,'deletePost']);
+Route::post('post/{main_post?}',[PostController::class , 'store']);
+Route::get('posts/{main_page}', [PostController::class, 'show']);
+
+Route::resource('post', PostController::class);
+
 
 Route::group([
 

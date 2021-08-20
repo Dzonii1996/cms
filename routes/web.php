@@ -1,9 +1,4 @@
-<?php
 
-use App\Http\Controllers\RegisterController;
-use Illuminate\Support\Facades\Route;
- use App\Models\Post;
-/*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -13,12 +8,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-//Route::get('/', function () {
-//    return view('posts',[
-//        'posts'=>Post::all()
-//    ]);
 //
+//Route::get('/', function () {
+//    return view('posts');
+//
+//});
+////
 //});
 //Route::get('posts/{post}',function($slug) {
 //    return view('post',['post'=>Post::findOrFail($slug)

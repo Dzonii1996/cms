@@ -12,12 +12,18 @@ class Post extends Model
     protected $fillable = [
         'main_post_id',
         'title',
+        'slug',
+        'slug',
+        'lang',
         'featured_image_id',
         'content',
     ];
-
-    public function featured_image()
-    {
+    public function featured_image(){
         return $this->hasOne(Media::class, 'id', 'featured_image_id');
     }
+
+    public function category(){
+        return $this->belongsToMany(Category::class, 'categories_posts', 'post_id', 'category_id' );
+    }
+
 }

@@ -38,7 +38,9 @@ Route::group([
 
     Route::resource('posts', PostController::class)->except([
         'store', 'show'
-    ]);
+
+ ]);
+});
 //CATEGORY
     Route::get('posts', [PostController::class, 'allLangPosts']);
     Route::group([
@@ -101,4 +103,3 @@ Route::group([
         Route::get('/user-profile', [AuthController::class, 'userProfile']);
 
     });
-});

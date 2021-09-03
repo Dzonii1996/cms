@@ -21,6 +21,8 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->text('content')->nullable();
             $table->timestamps();
+            $table->foreignId('status_id')->constrained('statuses');
+            $table->integer('author_id');
             $table->foreignId('featured_image_id')->nullable()->constrained('media');
             $table->timestamp('published_at')->nullable();
             $table->softDeletes();

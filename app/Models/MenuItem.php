@@ -11,9 +11,13 @@ class MenuItem extends Model
 
     protected $fillable = [
         'menu_id',
+        'parent_id',
         'name',
         'link',
         'type',
 
     ];
+    public function child_items(){
+        return $this->hasMany(MenuItem::class, 'parent_id', 'id');
+    }
 }

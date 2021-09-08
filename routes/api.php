@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\ManuItemController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PageController;
@@ -39,67 +40,76 @@ Route::group([
     Route::resource('posts', PostController::class)->except([
         'store', 'show'
 
- ]);
+    ]);
 });
 //CATEGORY
-    Route::get('posts', [PostController::class, 'allLangPosts']);
-    Route::group([
-        'middleware' => 'api',
-        'prefix' => '{lang}'
-    ], function () {
+Route::get('posts', [PostController::class, 'allLangPosts']);
+Route::group([
+    'middleware' => 'api',
+    'prefix' => '{lang}'
+], function () {
 
-        Route::post('category/{main_category?}', [CategoryController::class, 'store']);
-        Route::get('category/{main_category}', [CategoryController::class, 'show']);
+    Route::post('category/{main_category?}', [CategoryController::class, 'store']);
+    Route::get('category/{main_category}', [CategoryController::class, 'show']);
 
-        Route::resource('category', CategoryController::class)->except([
-            'store', 'show'
-        ]);
-    });
-    Route::get('category', [CategoryController::class, 'allLangCategory']);
-
-    //MENU
-    Route::group([
-        'middleware' => 'api',
-        'prefix' => '{lang}'
-    ], function () {
-        Route::get('menu{menu}', [MenuController::class, 'show']);
-        Route::post('menu{menu}', [ManuItemController::class, 'store']);
-    });
-    Route::resource('menu', MenuController::class)->except([
-        'show'
+    Route::resource('category', CategoryController::class)->except([
+        'store', 'show'
     ]);
-    //PAGE
+});
+Route::get('category', [CategoryController::class, 'allLangCategory']);
 
-    Route::group([
-        'middelwere' => 'api',
-        'prefix' => '{lang}'
-    ], function () {
+//MENU
+Route::group([
+    'middleware' => 'api',
+    'prefix' => '{lang}'
+], function () {
+    Route::get('menu{menu}', [MenuController::class, 'show']);
+    Route::post('menu{menu}', [ManuItemController::class, 'store']);
+});
+Route::resource('menu', MenuController::class)->except([
+    'show'
+]);
+//PAGE
+
+Route::group([
+    'middelwere' => 'api',
+    'prefix' => '{lang}'
+], function () {
 
 
-        Route::post('pages/{main_page?}', [PageController::class, 'store']);
-        Route::get('pages/{main_page}', [PageController::class, 'show']);
-        Route::get('pages/trash', [PageController::class, 'trash']);
-        Route::post('pages/trash/{page}', [PageController::class, 'restore']);
-        Route::delete('pages/trash/{page}', [PageController::class, 'delete']);
+    Route::post('pages/{main_page?}', [PageController::class, 'store']);
+    Route::get('pages/{main_page}', [PageController::class, 'show']);
+    Route::get('pages/trash', [PageController::class, 'trash']);
+    Route::post('pages/trash/{page}', [PageController::class, 'restore']);
+    Route::delete('pages/trash/{page}', [PageController::class, 'delete']);
 
 
-        Route::resource('pages', PageController::class)->except([
-            'store', 'show'
-        ]);
-    });
-    Route::get('pages', [PageController::class, 'allLangPages']);
+    Route::resource('pages', PageController::class)->except([
+        'store', 'show'
+    ]);
+    //MAIL
+
+});
+Route::get('pages', [PageController::class, 'allLangPages']);
 
 
-    Route::group([
+Route::group([
 
-        'middleware' => 'api',
-        'prefix' => 'auth'
-    ], function () {
+    'middleware' => 'api',
+    'prefix' => 'auth'
+], function () {
 
-        Route::post('/login', [AuthController::class, 'login']);
-        Route::post('/register', [AuthController::class, 'register']);
-        Route::post('/logout', [AuthController::class, 'logout']);
-        Route::post('/refresh', [AuthController::class, 'refresh']);
-        Route::get('/user-profile', [AuthController::class, 'userProfile']);
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);
 
-    });
+});
+
+
+Route::group(['api' => 'MailController'], function () {
+
+    Route::get('/send/mail', [MailController::class, 'mail']);
+
+});

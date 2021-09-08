@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PostRelation extends Model
+class Permision extends Model
 {
     use HasFactory;
 
+    public function roles() {
 
+        return $this->belongsToMany(Role::class,'roles_permissions');
 
-    public function post()
-    {
-        return $this->hasMany(Post::class, 'main_post_id', 'id');
     }
+
 }

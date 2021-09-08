@@ -9,10 +9,18 @@ class Media extends Model
 {
     use HasFactory;
 
-    protected  $fillable=[
+    const IMAGE_EXTENSION = ['jpg', 'jpeg', 'png', 'webp'];
+    const AUDIO_EXTENSION = ['mp3', 'mp4'];
+    const DOCUMENT_EXTENSION = ['doc', 'docx', 'pdf'];
+
+    protected $casts = [
+        'porperties' => 'array',
+    ];
+    protected $fillable = [
 
         'alt',
         'slug',
+        'properties',
         'type',
 
 

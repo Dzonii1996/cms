@@ -15,17 +15,10 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('lang');
-            $table->foreignId('main_post_id')->nullable()->constrained('post_relations');
-            $table->string('title');
-            $table->string('slug');
-            $table->text('content')->nullable();
-            $table->timestamps();
-            $table->foreignId('status_id')->constrained('statuses');
-            $table->integer('author_id');
             $table->foreignId('featured_image_id')->nullable()->constrained('media');
-            $table->timestamp('published_at')->nullable();
-            $table->softDeletes();
+            $table->integer('author_id');
+            $table->timestamps();
+
         });
     }
 

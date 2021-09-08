@@ -17,6 +17,7 @@ class CreateMediaTable extends Migration
             $table->id();
             $table->string('alt');
             $table->string('slug');
+            $table->text('properties')->nullable();
             $table->string('type');
             $table->timestamps();
         });
